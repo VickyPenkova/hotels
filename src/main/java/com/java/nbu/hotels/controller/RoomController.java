@@ -19,12 +19,16 @@ public class RoomController {
    private RoomService roomService;
 
    @RequestMapping("/rooms")
-   public RoomEntity getRooms() {
+   public List<RoomEntity> getRooms() {
       return roomService.getRooms();
    }
    @RequestMapping(method = RequestMethod.POST, value = "/rooms")
    public void addCourse(@RequestBody RoomEntity roomEntity) {
       roomService.addRoom(roomEntity);
+       System.out.println(roomEntity);
    }
-
+    @RequestMapping(method = RequestMethod.PUT, value = "/rooms")
+    public void updateCourse(@RequestBody RoomEntity roomEntity) {
+        roomService.updateRoom(roomEntity);
+    }
 }

@@ -13,10 +13,15 @@ public class RoomService {
 
     @Autowired private RoomRepository roomRepository;
 
-    public RoomEntity getRooms(){
-        return roomRepository.findRoomEntityById(1);
+    public List<RoomEntity> getRooms(){
+        List<RoomEntity> roomEntities = new ArrayList();
+        roomRepository.findAll().forEach(roomEntity -> roomEntities.add(roomEntity));
+        return roomEntities;
     }
     public void addRoom(RoomEntity roomEntity) {
+        roomRepository.save(roomEntity);
+    }
+    public void updateRoom(RoomEntity roomEntity){
         roomRepository.save(roomEntity);
     }
 
