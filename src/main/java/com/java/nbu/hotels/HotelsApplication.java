@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class HotelsApplication {
    public static void main(String[] args) {
-      SpringApplication.run(RoomController.class, args);
+      SpringApplication.run(HotelsApplication.class, args);
    }
 
 }

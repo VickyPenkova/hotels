@@ -1,5 +1,7 @@
 package com.java.nbu.hotels.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -14,7 +16,9 @@ public class RoomEntity {
    private Set<FacilitiesEntity> facilities;
    private Set<RoomPricePerDateEntity> roomPricesPerDate;
 
+
    @OneToMany(mappedBy = "room")
+   @JsonIgnore
    public Set<RoomPricePerDateEntity> getRoomPricesPerDate() {
       return roomPricesPerDate;
    }
@@ -25,6 +29,7 @@ public class RoomEntity {
    }
 
    @ManyToMany(mappedBy = "rooms")
+   @JsonIgnore
    public Set<FacilitiesEntity> getFacilities() {
       return facilities;
    }
@@ -34,6 +39,7 @@ public class RoomEntity {
    }
 
    @OneToMany(mappedBy = "room")
+   @JsonIgnore
    public Set<OrderEntity> getOrders() {
       return orders;
    }
@@ -91,7 +97,6 @@ public class RoomEntity {
    @Override
    public String toString() {
       return "RoomEntity{" + "id=" + id + ", type='" + type + '\''
-            + ", totalRoomsCnt=" + totalRoomsCnt + ", orders=" + orders
-            + ", facilities=" + facilities + '}';
+            + ", totalRoomsCnt=" + totalRoomsCnt+'}';
    }
 }
