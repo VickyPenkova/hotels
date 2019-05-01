@@ -16,6 +16,7 @@ public class UserEntity {
    private String email;
    private Set<OrderEntity> orders;
    private Set<BankDetailsEntity> banksDetails;
+   private String confirmationToken;
 
    @OneToMany(mappedBy = "user")
    @JsonIgnore
@@ -85,6 +86,15 @@ public class UserEntity {
 
    public void setEmail(String email) {
       this.email = email;
+   }
+
+   @Column(name = "confirmation_token")
+   public String getConfirmationToken(){
+      return this.confirmationToken;
+   }
+
+   public void setConfirmationToken(String confirmationToken) {
+      this.confirmationToken = confirmationToken;
    }
 
    @Override
