@@ -1,7 +1,6 @@
-package com.java.nbu.hotels;
+package com.java.nbu.hotels.entities;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -32,7 +31,7 @@ public class BankDetailsEntity {
    }
 
    @ManyToOne
-   @Column(name = "user_id", nullable = false)
+   @JoinColumn(name = "user_id", nullable = false)
    public UserEntity getUser() {
       return user;
    }

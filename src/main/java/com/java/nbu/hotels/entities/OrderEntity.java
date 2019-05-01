@@ -1,4 +1,4 @@
-package com.java.nbu.hotels;
+package com.java.nbu.hotels.entities;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

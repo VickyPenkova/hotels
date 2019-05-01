@@ -2,14 +2,14 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
     <persistence-unit name="NewPersistenceUnit">
-        <class>com.java.nbu.hotels.BankDetailsEntity</class>
-        <class>com.java.nbu.hotels.OrderEntity</class>
-        <class>com.java.nbu.hotels.RoomEntity</class>
-        <class>com.java.nbu.hotels.FacilitiesEntity</class>
-        <class>com.java.nbu.hotels.RoomPricePerDateEntity</class>
-        <class>com.java.nbu.hotels.UserEntity</class>
-        <class>com.java.nbu.hotels.BookedEntity</class>
-        <class>com.java.nbu.hotels.RoomFacilitiesEntity</class>
+        <class>com.java.nbu.hotels.entities.BankDetailsEntity</class>
+        <class>com.java.nbu.hotels.entities.OrderEntity</class>
+        <class>com.java.nbu.hotels.entities.RoomEntity</class>
+        <class>com.java.nbu.hotels.entities.FacilitiesEntity</class>
+        <class>com.java.nbu.hotels.entities.RoomPricePerDateEntity</class>
+        <class>com.java.nbu.hotels.entities.UserEntity</class>
+        <class>com.java.nbu.hotels.entities.BookedEntity</class>
+        <class>com.java.nbu.hotels.entities.RoomFacilitiesEntity</class>
         <properties>
             <property name="toplink.jdbc.url"
                       value="jdbc:mysql://localhost:3306?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>

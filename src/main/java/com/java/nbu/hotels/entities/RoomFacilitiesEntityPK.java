@@ -1,17 +1,16 @@
-package com.java.nbu.hotels;
+package com.java.nbu.hotels.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "Room_Facilities", schema = "Hotel", catalog = "")
-@IdClass(RoomFacilitiesEntityPK.class)
-public class RoomFacilitiesEntity {
+public class RoomFacilitiesEntityPK implements Serializable {
    private int roomId;
    private int facilityId;
 
-   @Id
    @Column(name = "room_id", nullable = false)
+   @Id
    public int getRoomId() {
       return roomId;
    }
@@ -20,8 +19,8 @@ public class RoomFacilitiesEntity {
       this.roomId = roomId;
    }
 
-   @Id
    @Column(name = "facility_id", nullable = false)
+   @Id
    public int getFacilityId() {
       return facilityId;
    }
@@ -36,7 +35,7 @@ public class RoomFacilitiesEntity {
          return true;
       if (o == null || getClass() != o.getClass())
          return false;
-      RoomFacilitiesEntity that = (RoomFacilitiesEntity) o;
+      RoomFacilitiesEntityPK that = (RoomFacilitiesEntityPK) o;
       return roomId == that.roomId && facilityId == that.facilityId;
    }
 

@@ -1,7 +1,6 @@
-package com.java.nbu.hotels;
+package com.java.nbu.hotels.entities;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -87,5 +86,12 @@ public class RoomEntity {
    @Override
    public int hashCode() {
       return Objects.hash(id, type, totalRoomsCnt);
+   }
+
+   @Override
+   public String toString() {
+      return "RoomEntity{" + "id=" + id + ", type='" + type + '\''
+            + ", totalRoomsCnt=" + totalRoomsCnt + ", orders=" + orders
+            + ", facilities=" + facilities + '}';
    }
 }
