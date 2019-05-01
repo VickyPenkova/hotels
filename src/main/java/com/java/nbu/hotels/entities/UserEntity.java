@@ -1,5 +1,7 @@
 package com.java.nbu.hotels.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -16,6 +18,7 @@ public class UserEntity {
    private Set<BankDetailsEntity> banksDetails;
 
    @OneToMany(mappedBy = "user")
+   @JsonIgnore
    public Set<BankDetailsEntity> getBanksDetails() {
       return banksDetails;
    }
@@ -25,6 +28,7 @@ public class UserEntity {
    }
 
    @OneToMany(mappedBy = "user")
+   @JsonIgnore
    public Set<OrderEntity> getOrders() {
       return orders;
    }

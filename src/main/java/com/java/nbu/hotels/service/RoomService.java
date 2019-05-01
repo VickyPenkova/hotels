@@ -18,11 +18,17 @@ public class RoomService {
         roomRepository.findAll().forEach(roomEntity -> roomEntities.add(roomEntity));
         return roomEntities;
     }
+
     public void addRoom(RoomEntity roomEntity) {
         roomRepository.save(roomEntity);
     }
+
     public void updateRoom(RoomEntity roomEntity){
         roomRepository.save(roomEntity);
     }
 
+    public void deleteRoom(int id){
+        RoomEntity roomToDelete = roomRepository.findRoomEntityById(id);
+        roomRepository.delete(roomToDelete);
+    }
 }

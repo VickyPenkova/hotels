@@ -5,10 +5,7 @@ import com.java.nbu.hotels.entities.RoomEntity;
 import com.java.nbu.hotels.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +19,7 @@ public class RoomController {
    public List<RoomEntity> getRooms() {
       return roomService.getRooms();
    }
+
    @RequestMapping(method = RequestMethod.POST, value = "/rooms")
    public void addCourse(@RequestBody RoomEntity roomEntity) {
       roomService.addRoom(roomEntity);
@@ -31,4 +29,9 @@ public class RoomController {
     public void updateCourse(@RequestBody RoomEntity roomEntity) {
         roomService.updateRoom(roomEntity);
     }
+
+   @RequestMapping(method = RequestMethod.DELETE, value = "/rooms/{id}")
+   public void deleteCourse(@PathVariable("id") int id) {
+      roomService.deleteRoom(id);
+   }
 }
