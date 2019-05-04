@@ -1,6 +1,5 @@
 package com.java.nbu.hotels.service;
 
-import com.java.nbu.hotels.entities.RoomEntity;
 import com.java.nbu.hotels.entities.UserEntity;
 import com.java.nbu.hotels.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class UserService {
       return users;
    }
 
-   public void registerUser(UserEntity user) {
+   public void saveUser(UserEntity user) {
       repo.save(user);
    }
 
@@ -31,5 +30,13 @@ public class UserService {
    public void deleteUser(int id){
       UserEntity userToDelete = repo.getUserById(id);
       repo.delete(userToDelete);
+   }
+
+   public UserEntity findByEmail(String email) {
+      return repo.findByEmailIdIgnoreCase(email);
+   }
+
+   public UserEntity findByConfirmationToken(String confirmationToken) {
+      return repo.findByConfirmationToken(confirmationToken);
    }
 }

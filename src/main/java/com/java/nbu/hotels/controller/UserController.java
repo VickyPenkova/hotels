@@ -1,6 +1,5 @@
 package com.java.nbu.hotels.controller;
 
-import com.java.nbu.hotels.entities.RoomEntity;
 import com.java.nbu.hotels.entities.UserEntity;
 import com.java.nbu.hotels.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +18,17 @@ public class UserController {
    }
 
    @RequestMapping(method = RequestMethod.POST, value = "/users")
-   public void addCourse(@RequestBody UserEntity user) {
-      userService.registerUser(user);
+   public void addUser(@RequestBody UserEntity user) {
+      userService.saveUser(user);
       System.out.println(user);
    }
    @RequestMapping(method = RequestMethod.PUT, value = "/users")
-   public void updateCourse(@RequestBody UserEntity user) {
+   public void updateUser(@RequestBody UserEntity user) {
       userService.updateUserInfo(user);
    }
 
    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{id}")
-   public void deleteCourse(@PathVariable("id") int id) {
+   public void deleteUser(@PathVariable("id") int id) {
       userService.deleteUser(id);
    }
 }

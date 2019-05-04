@@ -2,9 +2,11 @@ package com.java.nbu.hotels.repository;
 
 import com.java.nbu.hotels.entities.UserEntity;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface UserRepository extends CrudRepository<UserEntity, Integer> {
    UserEntity getUserById(int id);
 
@@ -12,5 +14,7 @@ public interface UserRepository extends CrudRepository<UserEntity, Integer> {
 
    List<UserEntity> findUsersByName(String name);
 
-   UserEntity findUserByEmail(String email);
+   UserEntity findByEmailIdIgnoreCase(String email);
+
+   UserEntity findByConfirmationToken(String confirmationToken);
 }

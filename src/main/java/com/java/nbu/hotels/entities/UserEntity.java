@@ -17,6 +17,7 @@ public class UserEntity {
    private Set<OrderEntity> orders;
    private Set<BankDetailsEntity> banksDetails;
    private String confirmationToken;
+   private boolean enabled;
 
    @OneToMany(mappedBy = "user")
    @JsonIgnore
@@ -95,6 +96,15 @@ public class UserEntity {
 
    public void setConfirmationToken(String confirmationToken) {
       this.confirmationToken = confirmationToken;
+   }
+
+   @Column(name = "enabled")
+   public boolean getEnabled() {
+      return enabled;
+   }
+
+   public void setEnabled(boolean value) {
+      this.enabled = value;
    }
 
    @Override
