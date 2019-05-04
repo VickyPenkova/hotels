@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
 @Controller
 public class UserAccountController {
 
@@ -77,7 +79,7 @@ public class UserAccountController {
       {
          UserEntity user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
          user.setEnabled(true);
-         user.setRole((byte)1);
+         user.setRole("USER");
          userRepository.save(user);
          modelAndView.setViewName("accountVerified");
       }

@@ -1,13 +1,27 @@
 package com.java.nbu.hotels.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "user", schema = "Hotel")
 public class UserEntity {
+   public UserEntity() {
+   }
+
+   public UserEntity(UserEntity user) {
+      this.id = user.getId();
+      this.role = user.getRole();
+      this.name = user.getName();
+      this.pass = user.getPass();
+      this.email = user.getEmail();
+      this.enabled = user.getEnabled();
+   }
+
    private int id;
-   private Byte role;
+   private String role;
    private String name;
    private String pass;
    private String email;
@@ -26,11 +40,11 @@ public class UserEntity {
 
    @Basic
    @Column(name = "role", nullable = true)
-   public Byte getRole() {
+   public String getRole() {
       return role;
    }
 
-   public void setRole(Byte role) {
+   public void setRole(String role) {
       this.role = role;
    }
 

@@ -2,14 +2,22 @@ package com.java.nbu.hotels.service;
 
 import com.java.nbu.hotels.entities.UserEntity;
 import com.java.nbu.hotels.repository.UserRepository;
+import com.nimbusds.openid.connect.sdk.claims.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService{
    @Autowired
    private UserRepository repo;
 
@@ -35,4 +43,5 @@ public class UserService {
    public UserEntity findByEmail(String email) {
       return repo.findByEmailIgnoreCase(email);
    }
+
 }
