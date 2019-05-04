@@ -33,7 +33,7 @@ public class RoomService {
     }
 
     public void deleteRoom(int id){
-        RoomEntity roomToDelete = roomRepository.findRoomEntityById(id);
+        RoomEntity roomToDelete = roomRepository.findRoomEntityByRoomid(id);
         roomRepository.delete(roomToDelete);
     }
 }

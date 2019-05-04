@@ -33,10 +33,6 @@ public class UserService {
    }
 
    public UserEntity findByEmail(String email) {
-      return repo.findByEmailIdIgnoreCase(email);
-   }
-
-   public UserEntity findByConfirmationToken(String confirmationToken) {
-      return repo.findByConfirmationToken(confirmationToken);
+      return repo.findByEmailIgnoreCase(email);
    }
 }

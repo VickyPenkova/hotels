@@ -1,6 +1,6 @@
 package com.java.nbu.hotels.controller;
 
-import com.java.nbu.hotels.entities.ConfirmationToken;
+import com.java.nbu.hotels.entities.ConformationTokenEntity;
 import com.java.nbu.hotels.entities.UserEntity;
 import com.java.nbu.hotels.repository.ConfirmationTokenRepository;
 import com.java.nbu.hotels.repository.UserRepository;
@@ -37,7 +37,7 @@ public class UserAccountController {
    public ModelAndView registerUser(ModelAndView modelAndView, UserEntity user)
    {
 
-      UserEntity existingUser = userRepository.findByEmailIdIgnoreCase(user.getEmail());
+      UserEntity existingUser = userRepository.findByEmailIgnoreCase(user.getEmail());
       if(existingUser != null)
       {
          modelAndView.addObject("message","This email already exists!");
@@ -47,22 +47,22 @@ public class UserAccountController {
       {
          userRepository.save(user);
 
-         ConfirmationToken confirmationToken = new ConfirmationToken(user);
+         ConformationTokenEntity confirmationToken = new ConformationTokenEntity(user);
 
          confirmationTokenRepository.save(confirmationToken);
 
          SimpleMailMessage mailMessage = new SimpleMailMessage();
          mailMessage.setTo(user.getEmail());
          mailMessage.setSubject("Complete Registration!");
-         mailMessage.setFrom("chand312902@gmail.com");
+         mailMessage.setFrom("vicky.penkova@gmail.com");
          mailMessage.setText("To confirm your account, please click here : "
-               +"http://localhost:8082/confirm-account?token="+confirmationToken.getConfirmationToken());
+               +"http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
 
          emailSenderService.sendEmail(mailMessage);
 
-         modelAndView.addObject("email", user.getEmail());
 
-         modelAndView.setViewName("successfulRegisteration");
+         modelAndView.addObject("email", user.getEmail());
+         modelAndView.setViewName("successfulRegistration");
       }
 
       return modelAndView;
@@ -71,12 +71,13 @@ public class UserAccountController {
    @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
    public ModelAndView confirmUserAccount(ModelAndView modelAndView, @RequestParam("token")String confirmationToken)
    {
-      ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
+      ConformationTokenEntity token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
 
       if(token != null)
       {
-         UserEntity user = userRepository.findByEmailIdIgnoreCase(token.getUser().getEmail());
+         UserEntity user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
          user.setEnabled(true);
+         user.setRole((byte)1);
          userRepository.save(user);
          modelAndView.setViewName("accountVerified");
       }
@@ -89,4 +90,27 @@ public class UserAccountController {
       return modelAndView;
    }
    // getters and setters
+   public UserRepository getUserRepository() {
+      return userRepository;
+   }
+
+   public void setUserRepository(UserRepository userRepository) {
+      this.userRepository = userRepository;
+   }
+
+   public ConfirmationTokenRepository getConfirmationTokenRepository() {
+      return confirmationTokenRepository;
+   }
+
+   public void setConfirmationTokenRepository(ConfirmationTokenRepository confirmationTokenRepository) {
+      this.confirmationTokenRepository = confirmationTokenRepository;
+   }
+
+   public EmailSenderService getEmailSenderService() {
+      return emailSenderService;
+   }
+
+   public void setEmailSenderService(EmailSenderService emailSenderService) {
+      this.emailSenderService = emailSenderService;
+   }
 }

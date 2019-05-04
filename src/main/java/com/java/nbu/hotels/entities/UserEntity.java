@@ -1,45 +1,20 @@
 package com.java.nbu.hotels.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "User", schema = "Hotel", catalog = "")
+@Table(name = "user", schema = "Hotel")
 public class UserEntity {
    private int id;
-   private byte role;
+   private Byte role;
    private String name;
    private String pass;
    private String email;
-   private Set<OrderEntity> orders;
-   private Set<BankDetailsEntity> banksDetails;
-   private String confirmationToken;
    private boolean enabled;
 
-   @OneToMany(mappedBy = "user")
-   @JsonIgnore
-   public Set<BankDetailsEntity> getBanksDetails() {
-      return banksDetails;
-   }
-
-   public void setBanksDetails(Set<BankDetailsEntity> banksDetails) {
-      this.banksDetails = banksDetails;
-   }
-
-   @OneToMany(mappedBy = "user")
-   @JsonIgnore
-   public Set<OrderEntity> getOrders() {
-      return orders;
-   }
-
-   public void setOrders(Set<OrderEntity> orders) {
-      this.orders = orders;
-   }
-
    @Id
+   @GeneratedValue(strategy = GenerationType.AUTO)
    @Column(name = "id", nullable = false)
    public int getId() {
       return id;
@@ -50,17 +25,17 @@ public class UserEntity {
    }
 
    @Basic
-   @Column(name = "role", nullable = false)
-   public byte getRole() {
+   @Column(name = "role", nullable = true)
+   public Byte getRole() {
       return role;
    }
 
-   public void setRole(byte role) {
+   public void setRole(Byte role) {
       this.role = role;
    }
 
    @Basic
-   @Column(name = "name", nullable = false, length = 150)
+   @Column(name = "name", nullable = true, length = 150)
    public String getName() {
       return name;
    }
@@ -70,7 +45,7 @@ public class UserEntity {
    }
 
    @Basic
-   @Column(name = "pass", nullable = false, length = 150)
+   @Column(name = "pass", nullable = true, length = 150)
    public String getPass() {
       return pass;
    }
@@ -80,7 +55,7 @@ public class UserEntity {
    }
 
    @Basic
-   @Column(name = "email", nullable = false, length = 150)
+   @Column(name = "email", nullable = true, length = 150)
    public String getEmail() {
       return email;
    }
@@ -89,22 +64,14 @@ public class UserEntity {
       this.email = email;
    }
 
-   @Column(name = "confirmation_token")
-   public String getConfirmationToken(){
-      return this.confirmationToken;
-   }
-
-   public void setConfirmationToken(String confirmationToken) {
-      this.confirmationToken = confirmationToken;
-   }
-
-   @Column(name = "enabled")
+   @Basic
+   @Column(name = "enabled", nullable = true)
    public boolean getEnabled() {
       return enabled;
    }
 
-   public void setEnabled(boolean value) {
-      this.enabled = value;
+   public void setEnabled(boolean enabled) {
+      this.enabled = enabled;
    }
 
    @Override
@@ -114,13 +81,14 @@ public class UserEntity {
       if (o == null || getClass() != o.getClass())
          return false;
       UserEntity that = (UserEntity) o;
-      return id == that.id && role == that.role && Objects
+      return id == that.id && Objects.equals(role, that.role) && Objects
             .equals(name, that.name) && Objects.equals(pass, that.pass)
-            && Objects.equals(email, that.email);
+            && Objects.equals(email, that.email) && Objects
+            .equals(enabled, that.enabled);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, role, name, pass, email);
+      return Objects.hash(id, role, name, pass, email, enabled);
    }
 }

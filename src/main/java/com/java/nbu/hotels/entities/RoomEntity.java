@@ -1,65 +1,30 @@
 package com.java.nbu.hotels.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "Room", schema = "Hotel", catalog = "")
+@Table(name = "room", schema = "Hotel")
 public class RoomEntity {
-   private int id;
+   private int roomid;
    private String type;
-   private int totalRoomsCnt;
-   private Set<OrderEntity> orders;
-   private Set<FacilitiesEntity> facilities;
-   private Set<RoomPricePerDateEntity> roomPricesPerDate;
-
-
-   @OneToMany(mappedBy = "room")
-   @JsonIgnore
-   public Set<RoomPricePerDateEntity> getRoomPricesPerDate() {
-      return roomPricesPerDate;
-   }
-
-   public void setRoomPricesPerDate(
-         Set<RoomPricePerDateEntity> roomPricesPerDate) {
-      this.roomPricesPerDate = roomPricesPerDate;
-   }
-
-   @ManyToMany(mappedBy = "rooms")
-   @JsonIgnore
-   public Set<FacilitiesEntity> getFacilities() {
-      return facilities;
-   }
-
-   public void setFacilities(Set<FacilitiesEntity> facilities) {
-      this.facilities = facilities;
-   }
-
-   @OneToMany(mappedBy = "room")
-   @JsonIgnore
-   public Set<OrderEntity> getOrders() {
-      return orders;
-   }
-
-   public void setOrders(Set<OrderEntity> orders) {
-      this.orders = orders;
-   }
+   private Double price;
+   Set<BookingEntity> booking;
 
    @Id
-   @Column(name = "id", nullable = false)
-   public int getId() {
-      return id;
+   @GeneratedValue(strategy = GenerationType.AUTO)
+   @Column(name = "roomid", nullable = false)
+   public int getRoomid() {
+      return roomid;
    }
 
-   public void setId(int id) {
-      this.id = id;
+   public void setRoomid(int roomid) {
+      this.roomid = roomid;
    }
 
    @Basic
-   @Column(name = "type", nullable = false, length = 150)
+   @Column(name = "type", nullable = true, length = 150)
    public String getType() {
       return type;
    }
@@ -69,13 +34,24 @@ public class RoomEntity {
    }
 
    @Basic
-   @Column(name = "total_rooms_cnt", nullable = false)
-   public int getTotalRoomsCnt() {
-      return totalRoomsCnt;
+   @Column(name = "price", nullable = true, precision = 0)
+   public Double getPrice() {
+      return price;
    }
 
-   public void setTotalRoomsCnt(int freeRoomsCnt) {
-      this.totalRoomsCnt = freeRoomsCnt;
+   public void setPrice(Double price) {
+      this.price = price;
+   }
+
+   @ManyToMany(cascade = CascadeType.ALL)
+   @JoinTable(name = "room_has_booking", joinColumns = @JoinColumn(name="room_roomid", referencedColumnName = "roomid"),
+   inverseJoinColumns = @JoinColumn(name="booking_idbooking",referencedColumnName = "idbooking"))
+   public Set<BookingEntity> getBooking() {
+      return booking;
+   }
+
+   public void setBooking(Set<BookingEntity> booking) {
+      this.booking = booking;
    }
 
    @Override
@@ -85,18 +61,12 @@ public class RoomEntity {
       if (o == null || getClass() != o.getClass())
          return false;
       RoomEntity that = (RoomEntity) o;
-      return id == that.id && totalRoomsCnt == that.totalRoomsCnt && Objects
-            .equals(type, that.type);
+      return roomid == that.roomid && Objects.equals(type, that.type) && Objects
+            .equals(price, that.price);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, type, totalRoomsCnt);
-   }
-
-   @Override
-   public String toString() {
-      return "RoomEntity{" + "id=" + id + ", type='" + type + '\''
-            + ", totalRoomsCnt=" + totalRoomsCnt+'}';
+      return Objects.hash(roomid, type, price);
    }
 }

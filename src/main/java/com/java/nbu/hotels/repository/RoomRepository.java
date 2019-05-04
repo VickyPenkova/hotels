@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface RoomRepository extends CrudRepository<RoomEntity, Integer> {
 
-    RoomEntity findRoomEntityById(int id);
+    RoomEntity findRoomEntityByRoomid(int id);
     List<RoomRepository> findByType(String type);
-    List<RoomRepository> findByTotalRoomsCnt(int totalRoomsCnt);
+    List<RoomRepository> findByPrice(Double price);
 }

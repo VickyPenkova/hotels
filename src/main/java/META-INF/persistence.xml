@@ -2,29 +2,26 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
     <persistence-unit name="NewPersistenceUnit">
-        <class>com.java.nbu.hotels.entities.BankDetailsEntity</class>
-        <class>com.java.nbu.hotels.entities.OrderEntity</class>
+        <class>com.java.nbu.hotels.entities.BookingEntity</class>
         <class>com.java.nbu.hotels.entities.RoomEntity</class>
-        <class>com.java.nbu.hotels.entities.FacilitiesEntity</class>
-        <class>com.java.nbu.hotels.entities.RoomPricePerDateEntity</class>
+        <class>com.java.nbu.hotels.entities.RoomHasBookingEntity</class>
+        <class>com.java.nbu.hotels.entities.ConformationTokenEntity</class>
         <class>com.java.nbu.hotels.entities.UserEntity</class>
-        <class>com.java.nbu.hotels.entities.BookedEntity</class>
-        <class>com.java.nbu.hotels.entities.RoomFacilitiesEntity</class>
         <properties>
             <property name="toplink.jdbc.url"
-                      value="jdbc:mysql://localhost:3306?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+                      value="jdbc:mysql://localhost:3306/Hotel?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoreconnect = true"/>
             <property name="toplink.jdbc.driver"
                       value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.connection.url"
-                      value="jdbc:mysql://localhost:3306?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+                      value="jdbc:mysql://localhost:3306/Hotel?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoreconnect = true"/>
             <property name="hibernate.connection.driver_class"
                       value="com.mysql.cj.jdbc.Driver"/>
             <property name="openjpa.ConnectionURL"
-                      value="jdbc:mysql://localhost:3306?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+                      value="jdbc:mysql://localhost:3306/Hotel?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoreconnect = true"/>
             <property name="openjpa.ConnectionDriverName"
                       value="com.mysql.cj.jdbc.Driver"/>
             <property name="eclipselink.jdbc.url"
-                      value="jdbc:mysql://localhost:3306?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+                      value="jdbc:mysql://localhost:3306/Hotel?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoreconnect = true"/>
             <property name="eclipselink.jdbc.driver"
                       value="com.mysql.cj.jdbc.Driver"/>
         </properties>

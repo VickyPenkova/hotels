@@ -10,11 +10,9 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<UserEntity, Integer> {
    UserEntity getUserById(int id);
 
-   List<UserEntity> findUsersByRole(byte role);
+   List<UserEntity> findUsersByRole(boolean role);
 
    List<UserEntity> findUsersByName(String name);
 
-   UserEntity findByEmailIdIgnoreCase(String email);
-
-   UserEntity findByConfirmationToken(String confirmationToken);
+   UserEntity findByEmailIgnoreCase(String emailId);
 }
