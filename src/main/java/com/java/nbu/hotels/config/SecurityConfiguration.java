@@ -1,5 +1,7 @@
 package com.java.nbu.hotels.config;
 
+import com.java.nbu.hotels.entities.UserEntity;
+import com.java.nbu.hotels.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -24,24 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
       auth.userDetailsService(userDetailsService)
             .passwordEncoder(getPasswordEncoder());
-
-      //auth.authenticationProvider(authenticationProvider());
    }
-
-   @Bean
-   public DaoAuthenticationProvider authenticationProvider() {
-      DaoAuthenticationProvider authProvider
-            = new DaoAuthenticationProvider();
-      authProvider.setUserDetailsService(userDetailsService);
-      authProvider.setPasswordEncoder(encoder());
-      return authProvider;
-   }
-
-   @Bean
-   public PasswordEncoder encoder() {
-      return new BCryptPasswordEncoder(11);
-   }
-
 
    @Override
    protected void configure(HttpSecurity http) throws Exception {
@@ -51,7 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
       http.csrf().disable();
       http.authorizeRequests()
-            //.antMatchers("/hello").authenticated()
+            .antMatchers("/**")
+            .authenticated()
             .anyRequest().permitAll()
             .and().formLogin().permitAll()
             .and().formLogin().defaultSuccessUrl("/user/index.html", true);
@@ -65,8 +50,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
          }
 
          @Override
-         public boolean matches(CharSequence charSequence, String s) {
-            return true;
+         public boolean matches(CharSequence rawPassword, String hashedPassword) {
+//            String hashedPassword2 = new BCryptPasswordEncoder().encode(rawPassword); // hash your rawPassword here
+//            return hashedPassword2.equals(hashedPassword);
+            return rawPassword.toString().equals(hashedPassword);
          }
       };
    }

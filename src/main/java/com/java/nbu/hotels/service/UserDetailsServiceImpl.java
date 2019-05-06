@@ -24,6 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
       //      return Optional.ofNullable(optionalUser).orElseThrow(()->new UsernameNotFoundException("Username Not Found"))
       //            .map(UserDetailsImpl::new).get();
       UserEntity user = usersRepository.findByEmailIgnoreCase(userName);
+
       if(user == null){
          throw new UsernameNotFoundException(userName);
       }
