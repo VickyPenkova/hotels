@@ -15,7 +15,7 @@ public interface UserRepository extends CrudRepository<UserEntity, Integer> {
 
    List<UserEntity> findUsersByName(String name);
 
-   UserEntity findByEmailIgnoreCase(String emailId);
+   UserEntity findByEmailIgnoreCase(String username);
 
    Optional<UserEntity> findByEmail(String emailId);
 }

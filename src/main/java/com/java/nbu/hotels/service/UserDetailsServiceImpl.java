@@ -16,12 +16,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
    @Autowired
    private UserRepository usersRepository;
 
-   // Mind the GAP OPTIONAL USER
+   // Mind the GAP OPTIONAL USER -> old logic
    @Override
    public UserDetails loadUserByUsername(String userName) throws
          UsernameNotFoundException {
-      Optional<UserEntity> optionalUser = usersRepository.findByEmail(userName);
-      return Optional.ofNullable(optionalUser).orElseThrow(()->new UsernameNotFoundException("Username Not Found"))
-            .map(UserDetailsImpl::new).get();
+      //      Optional<UserEntity> optionalUser = usersRepository.findByEmail(userName);
+      //      return Optional.ofNullable(optionalUser).orElseThrow(()->new UsernameNotFoundException("Username Not Found"))
+      //            .map(UserDetailsImpl::new).get();
+      UserEntity user = usersRepository.findByEmailIgnoreCase(userName);
+      if(user == null){
+         throw new UsernameNotFoundException(userName);
+      }
+
+      return new UserDetailsImpl(user);
    }
 }
