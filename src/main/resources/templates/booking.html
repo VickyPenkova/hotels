@@ -8,7 +8,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Register</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <style>
         .sized{
 
@@ -51,6 +55,12 @@
         .darkBorder{
             border-color: #111;
         }
+        .gj-picker-bootstrap div[role=navigator]{
+            color:#000;
+        }
+        table{
+            color:#000;
+        }
 
     </style>
 </head>
@@ -79,50 +89,63 @@
     </nav>
 </div>
 
-<div class="row mt-3 mb-3">
+<div class="row mt-3 mb-5">
     <div class="col-12">
         <div class="">
-            <h2 class="text-center honeyYellow">Your reservations</h2>
+            <h2 class="text-center honeyYellow">Book a room</h2>
         </div>
     </div>
 </div>
-<!--    table of bookings-->
-<div class="row">
-    <div class="col-12">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead class="emberYellow">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Room</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
+<div class="container mt-3">
+    <div class="row mt-3 mb-3">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="row mx-auto">
+                <div class="col-3 col-md-12 col-sm-12">
+                    <p>
+                        Start date
+                    </p>
+                </div>
+                <div class="col-9 col-md-12 col-sm-12 mx-auto text-center">
+                    <p>
+                        <input id="datepicker" width="276" />
+                    </p>
+                </div>
+            </div>
 
-                </tr>
-                <th:block th:each="booking : ${bookings}">
-                    <tr>
-                        <td>#</td>
-                        <td th:each="room : ${booking.getRooms()}">
-                            <span th:text="${room.getType()}"></span>
-                        </td>
-                        <td th:text="${booking.getStartDate()}">...</td>
-                        <td th:text="${booking.getEndDate()}">...</td>
-                        <td th:text="${booking.getStatus()}">...</td>
-                        <td th:text="Details">...</td>
-                    </tr>
-                </th:block>
-                </tbody>
-            </table>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="row mx-auto">
+                <div class="col-3 col-md-12 col-sm-12">
+                    <p>
+                        End date
+                    </p>
+                </div>
+                <div class="col-9 col-md-12 col-sm-12">
+                    <p>
+                        <input id="datepicker2" width="276" />
+                    </p>
+                </div>
+            </div>
+
         </div>
     </div>
-
 </div>
+
+<div class="row mx-auto">
+    <div class="col-12 mx-auto text-center mt-5">
+        <button class="btn btn-warning" type="submit" >Next Step</button>
+    </div>
+</div>
+
 
 
 </body>
+<script>
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+    $('#datepicker2').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+</script>
 </html>
