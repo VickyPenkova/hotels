@@ -9,28 +9,32 @@
     <meta name="author" content="">
     <title>Register</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
 </head>
-<body>
+<body style="background-color:#ffe7ad;">
 <div class="container">
-    <form action="#" th:action="@{/register}" th:object="${userEntity}" method="post">
-        <h2 class="form-signin-heading">Register</h2>
+    <form class="form-signin" action="#" th:action="@{/register}" th:object="${userEntity}" method="post">
+        <h2 class="form-signin-heading mb-3">Register</h2>
         <p>
             <label class="sr-only">Name</label>
             <input th:field="*{name}" type="text" name="name" class="form-control" placeholder="Name" required autofocus>
         </p>
         <p>
             <label class="sr-only">Email</label>
-            <input th:field="*{email}" type="text" name="email" class="form-control" placeholder="Email" required autofocus>
+            <input th:field="*{email}" type="text" name="email" class="form-control" placeholder="Email" required >
         </p>
         <p>
             <label class="sr-only">Password</label>
-            <input th:field="*{pass}" type="password" id="username" name="password" class="form-control" placeholder="Password" required autofocus>
+            <input th:field="*{pass}" type="password" id="username" name="password" class="form-control" placeholder="Password" required >
         </p>
-        <p>
-            <input type="reset" value="Clear">
-            <input type="submit" value="Submit">
-        </p>
+        <div class="row">
+            <div class="col-6"><input class="btn btn-lg btn-warning btn-block" type="reset" value="Clear"></div>
+            <div class="col-6"><input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit"></div>
+        </div>
     </form>
+    <div class="form-signin">
+    <a class="btn btn-lg btn-info btn-block mx-auto" href="/login">Already registered? Sign in</a>
+    </div>
 </div>
 </body>
 </html>
