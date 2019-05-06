@@ -33,13 +33,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/register").permitAll()
             .antMatchers("/confirm").permitAll();
 
-      http.csrf().disable();
-      http.authorizeRequests()
-            .antMatchers("/**")
-            .authenticated()
-            .anyRequest().permitAll()
-            .and().formLogin().permitAll()
-            .and().formLogin().defaultSuccessUrl("/user/index.html", true);
+      http
+            .csrf().disable();
+      http
+            .authorizeRequests()
+               .antMatchers("/resources/**").permitAll()
+            //.antMatchers("/**")
+               .anyRequest().authenticated()
+               .and()
+            .formLogin()
+               .loginPage("/login")
+               .permitAll()
+               .failureUrl("/login?error=true")
+               .defaultSuccessUrl("/user/index.html", true)
+               .and()
+            .logout()
+               .permitAll()
+               .invalidateHttpSession(true)
+               .logoutSuccessUrl("/login?logout=true");
    }
 
    private PasswordEncoder getPasswordEncoder() {
