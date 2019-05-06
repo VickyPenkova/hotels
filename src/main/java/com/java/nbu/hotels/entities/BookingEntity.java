@@ -27,7 +27,7 @@ public class BookingEntity {
    }
 
    @Basic
-   @Column(name = "startDate", nullable = true)
+   @Column(name = "start_date", nullable = true)
    public Date getStartDate() {
       return startDate;
    }
@@ -37,7 +37,7 @@ public class BookingEntity {
    }
 
    @Basic
-   @Column(name = "endDate", nullable = true)
+   @Column(name = "end_date", nullable = true)
    public Date getEndDate() {
       return endDate;
    }
@@ -56,7 +56,7 @@ public class BookingEntity {
       this.status = status;
    }
 
-   @OneToOne
+   @ManyToOne
    @JoinColumn(name="user_id", referencedColumnName = "id")
    public UserEntity getUser() {
       return user;

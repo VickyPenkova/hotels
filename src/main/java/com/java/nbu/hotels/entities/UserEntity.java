@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "Hotel")
@@ -26,6 +27,7 @@ public class UserEntity {
    private String pass;
    private String email;
    private boolean enabled;
+   private Set<BookingEntity> bookings;
 
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
@@ -86,6 +88,15 @@ public class UserEntity {
 
    public void setEnabled(boolean enabled) {
       this.enabled = enabled;
+   }
+
+   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+   public Set<BookingEntity> getBookings() {
+      return bookings;
+   }
+
+   public void setBookings(Set<BookingEntity> bookings) {
+      this.bookings = bookings;
    }
 
    @Override

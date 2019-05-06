@@ -1,13 +1,19 @@
 package com.java.nbu.hotels.controller;
 
+import com.java.nbu.hotels.entities.BookingEntity;
 import com.java.nbu.hotels.entities.UserEntity;
+import com.java.nbu.hotels.service.BookingService;
+import com.java.nbu.hotels.service.RoomService;
 import com.java.nbu.hotels.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,10 +22,21 @@ public class UserController {
    @Autowired
    private UserService userService;
 
+   @Autowired
+   private BookingService bookingService;
+
    @RequestMapping("/dashboard")
    public ModelAndView dashboard() {
+      int userId;
+      Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      if (principal instanceof UserDetails) {
+         userId = ((UserEntity)principal).getId();
+      } else {
+         userId = 0;
+      }
+      List<BookingEntity> bookings = bookingService.getBookingsOfUser(userId);
       ModelAndView mav = new ModelAndView();
-      //mav.addObject("message", message);
+      mav.addObject("bookings", bookings);
       mav.setViewName("dashboard");
 
       return mav;

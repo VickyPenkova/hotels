@@ -83,26 +83,20 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Apartement</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Apartement</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Signle room</td>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                <th:block th:each="booking : ${bookings}">
+                    <tr>
+                        <td>#</td>
+                        <td th:each="room : ${booking.getRooms()}">
+                            <span th:text="${room.getType()}"></span>
+                        </td>
+                        <td th:text="${booking.getStartDate()}">...</td>
+                        <td th:text="${booking.getEndDate()}">...</td>
+                        <td th:text="${booking.getStatus()}">...</td>
+                        <td th:text="Details">...</td>
+                    </tr>
+                </th:block>
                 </tbody>
             </table>
         </div>
