@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <style>
+        .sized{
+
+            width: 2rem;
+            height: auto;
+        }
+        .honeyYellow{
+            color:#FFB600;
+        }
+        .emberYellow{
+            color:#d19500;
+        }
+        .lightYellow{
+            color:#ffe7ad;
+        }
+        .heyYellowBG{
+            background-color: #FFB600;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color:#ffe7ad;
+        }
+
+    </style>
+</head>
+
+<body class="dark container-fluid p-0">
+<!--       Header-->
+<div class="container-fluid p-0">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #FFB600;">
+        <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/svg/25/25334.svg" alt="" class="sized"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">My bookings <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Book a room</a>
+                <a class="nav-item nav-link" href="#">My user details</a>
+                <a class="nav-item nav-link" href="#">Log Out</a>
+
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="row mt-3 mb-3">
+    <div class="col-12">
+        <div class="">
+            <h2 class="text-center emberYellow">Your reservations</h2>
+        </div>
+    </div>
+</div>
+<!--    table of bookings-->
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="emberYellow">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Room</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Apartement</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Apartement</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Signle room</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
