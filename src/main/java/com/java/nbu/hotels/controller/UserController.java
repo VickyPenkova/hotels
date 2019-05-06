@@ -6,17 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
    @Autowired
    private UserService userService;
 
-   @RequestMapping(method = RequestMethod.GET)
-   public String index() {
-      return "Hello! Welcome to your profile!";
+   @RequestMapping("/dashboard")
+   public ModelAndView dashboard() {
+      ModelAndView mav = new ModelAndView();
+      //mav.addObject("message", message);
+      mav.setViewName("dashboard");
+
+      return mav;
    }
 
    @PreAuthorize("hasAnyRole('USER')")

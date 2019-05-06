@@ -2,7 +2,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Register</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -47,8 +46,14 @@
                 <a class="nav-item nav-link active" href="#">My bookings <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="#">Book a room</a>
                 <a class="nav-item nav-link" href="#">My user details</a>
-                <a class="nav-item nav-link" href="#">Log Out</a>
-
+<!--                <a class="nav-item nav-link" href="#">Log Out</a>-->
+                <form class="nav-item nav-link" action="/logout" method="post">
+                    Log Out
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
+                    <input type="submit" value="Logout">
+                </form>
             </div>
         </div>
     </nav>
