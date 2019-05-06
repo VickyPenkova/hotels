@@ -3,9 +3,19 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registration Success</title>
+    <title>Registration Error</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
 </head>
-<body>
-    <span th:text="${message}"></span>
+<body style="background-color:#ffe7ad;">
+<div class="container mt-5">
+
+    <div class="alert alert-danger">
+        <h2 class="mb-2">Ooops! Something went wrong!</h2>
+        <p th:text="${message}"></p>
+
+    </div>
+
+</div>
 </body>
 </html>
