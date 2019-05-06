@@ -3,27 +3,34 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Register</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
-<form action="#" th:action="@{/register}" th:object="${userEntity}" method="post">
-    <table>
-        <tr>
-            <td><label>Name</label></td>
-            <td><input th:field="*{name}" type="text" name="name"></td>
-        </tr>
-        <tr>
-            <td><label>Email</label></td>
-            <td><input th:field="*{email}" type="text" name="email"></td>
-        </tr>
-        <tr>
-            <td><label>Password</label></td>
-            <td><input th:field="*{pass}" type="password" name="password"></td>
-        </tr>
-        <tr>
-            <td><input type="reset" value="Clear"/></td>
-            <td><input type="submit" value="Submit"></td>
-        </tr>
-    </table>
-</form>
+<div class="container">
+    <form action="#" th:action="@{/register}" th:object="${userEntity}" method="post">
+        <h2 class="form-signin-heading">Register</h2>
+        <p>
+            <label class="sr-only">Name</label>
+            <input th:field="*{name}" type="text" name="name" class="form-control" placeholder="Name" required autofocus>
+        </p>
+        <p>
+            <label class="sr-only">Email</label>
+            <input th:field="*{email}" type="text" name="email" class="form-control" placeholder="Email" required autofocus>
+        </p>
+        <p>
+            <label class="sr-only">Password</label>
+            <input th:field="*{pass}" type="password" id="username" name="password" class="form-control" placeholder="Password" required autofocus>
+        </p>
+        <p>
+            <input type="reset" value="Clear">
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+</div>
 </body>
 </html>
