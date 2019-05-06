@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BookingRepository extends CrudRepository<BookingEntity, Integer> {
    List<BookingEntity> findByUserId(int userId);
+   BookingEntity findBookingEntityByIdBooking(int bookingId);
 }

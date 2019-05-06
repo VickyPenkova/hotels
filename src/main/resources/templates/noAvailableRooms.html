@@ -66,7 +66,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#">My bookings <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="/user/booking">Book a room</a>
+                <a class="nav-item nav-link" href="#">Book a room</a>
                 <form class="nav-item form-inline" action="/logout" method="post">
                     <input type="hidden"
                            name="${_csrf.parameterName}"
@@ -79,49 +79,9 @@
     </nav>
 </div>
 
-<div class="row mt-3 mb-3">
-    <div class="col-12">
-        <div class="">
-            <h2 class="text-center honeyYellow">Your reservations</h2>
-        </div>
-    </div>
+<div class="alert alert-warning">
+    <h2 class="mb-2">No available rooms for this period</h2>
 </div>
-<!--    table of bookings-->
-<div class="row">
-    <div class="col-12">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead class="emberYellow">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Room</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-
-                </tr>
-                <th:block th:each="booking : ${bookings}">
-                    <tr>
-                        <td>#</td>
-                        <td th:each="room : ${booking.getRooms()}">
-                            <span th:text="${room.getType()}"></span>
-                        </td>
-                        <td th:text="${booking.getStartDate()}">...</td>
-                        <td th:text="${booking.getEndDate()}">...</td>
-                        <td th:text="${booking.getStatus()}">...</td>
-                    </tr>
-                </th:block>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</div>
-
 
 </body>
 </html>

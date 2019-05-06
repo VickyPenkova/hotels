@@ -44,4 +44,7 @@ public class UserService{
       return repo.findByEmailIgnoreCase(email);
    }
 
+   public UserEntity findById(int id) {
+      return repo.getUserById(id);
+   }
 }
