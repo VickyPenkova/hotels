@@ -4,6 +4,7 @@ import com.java.nbu.hotels.entities.UserEntity;
 import com.java.nbu.hotels.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,11 @@ import java.util.List;
 public class UserController {
    @Autowired
    private UserService userService;
+
+   @RequestMapping(method = RequestMethod.GET)
+   public String index() {
+      return "Hello! Welcome to your profile!";
+   }
 
    @PreAuthorize("hasAnyRole('USER')")
    @RequestMapping("/hello")
