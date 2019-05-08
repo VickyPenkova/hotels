@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Register</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <style>
@@ -72,8 +73,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">My bookings <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">Book a room</a>
+                <a class="nav-item nav-link active" href="/user/dashboard">My bookings <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/user/booking">Book a room</a>
                 <form class="nav-item form-inline" action="/logout" method="post">
                     <input type="hidden"
                            name="${_csrf.parameterName}"
@@ -104,11 +105,8 @@
                 </div>
                 <div class="col-9 col-md-12 col-sm-12 mx-auto text-center">
                     <p>
-                        <input type="date" th:field="*{startDate}" />
+                        <input id="startDate" type="date" th:field="*{startDate}" />
                     </p>
-<!--                    <p>-->
-<!--                        <input id="datepicker" width="276" />-->
-<!--                    </p>-->
                 </div>
             </div>
 
@@ -122,7 +120,7 @@
                 </div>
                 <div class="col-9 col-md-12 col-sm-12">
                     <p>
-                        <input type="date" th:field="*{endDate}" />
+                        <input id="endDate" type="date" th:field="*{endDate}" />
                     </p>
                 </div>
             </div>
@@ -131,14 +129,31 @@
     </div>
     <div class="row mx-auto">
         <div class="col-12 mx-auto text-center mt-5">
-            <button class="btn btn-warning" type="submit" >Next Step</button>
+            <button id="next" class="btn btn-warning" type="submit">Next Step</button>
         </div>
     </div>
 </form>
+<script>
+    // Validate input
+    $( document ).ready(function() {
+        $("#next").hide();
+        $('#endDate').attr('readonly', true);
+        $("#startDate").change(function(){
+            $('#endDate').attr('readonly', false);
+        });
+        $("#endDate").change(function(){
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+            if(startDate<endDate){
+                $("#next").show();
+            }
+            else{
+                $("#next").hide();
+            }
 
-
-
-
-
+        });
+    });
+</script>
 </body>
+
 </html>

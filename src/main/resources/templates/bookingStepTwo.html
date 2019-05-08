@@ -110,13 +110,13 @@
 
                 <select class="custom-select" id="inputGroupSelect01">
                     <option selected>Choose...</option>
-                    <option th:each="room : ${availableRooms}" th:text="${room.getType()}"></option>
+                    <option th:each="room : ${availableRooms}" th:text="${room.getType()}" th:attr="price=${room.getPrice()}"></option>
                 </select>
             </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <label for="">Price</label>
-            <h4 class="honeyYellow">Price</h4>
+            <label>Price</label>
+            <h4 id="price" class="honeyYellow">Price</h4>
         </div>
     </div>
 </div>
@@ -131,11 +131,13 @@
 
 </body>
 <script>
-    $('#datepicker').datepicker({
-        uiLibrary: 'bootstrap4'
-    });
-    $('#datepicker2').datepicker({
-        uiLibrary: 'bootstrap4'
+    $( document ).ready(function() {
+
+        $("#inputGroupSelect01").change(function(){
+            var selectedRoomPrice =  $(this).children("option:selected").attr("price");
+            $("#price").text(selectedRoomPrice);
+        });
+
     });
 </script>
 </html>

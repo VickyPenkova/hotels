@@ -65,8 +65,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">My bookings <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">Book a room</a>
+                <a class="nav-item nav-link active" href="/user/dashboard">My bookings <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/user/booking">Book a room</a>
                 <form class="nav-item form-inline" action="/logout" method="post">
                     <input type="hidden"
                            name="${_csrf.parameterName}"
@@ -78,10 +78,19 @@
         </div>
     </nav>
 </div>
-
-<div class="alert alert-warning">
-    <h2 class="mb-2">No available rooms for this period</h2>
+<div class="row mt-5">
+    <div class="container">
+        <div class="alert alert-warning">
+            <h2 class="mb-2">No available rooms for this period</h2>
+        </div>
+    </div>
 </div>
+<div class="row mx-auto">
+    <div class="col-12 mx-auto text-center mt-5">
+        <a href="/user/dashboard"><button class="btn btn-warning" type="" >Back to dashboard</button></a>
+    </div>
+</div>
+
 
 </body>
 </html>
