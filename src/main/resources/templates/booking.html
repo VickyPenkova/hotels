@@ -96,22 +96,21 @@
 </div>
 <form class="container mt-3" action="/user/createBooking" method="post" th:object="${newBooking}">
     <div class="row mt-3 mb-3">
-        <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="row mx-auto">
                 <div class="col-3 col-md-12 col-sm-12">
                     <p>
                         Start date
                     </p>
                 </div>
-                <div class="col-9 col-md-12 col-sm-12 mx-auto text-center">
+                <div class="col-9 col-md-12 col-sm-12">
                     <p>
                         <input id="startDate" type="date" th:field="*{startDate}" />
                     </p>
                 </div>
             </div>
-
         </div>
-        <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="row mx-auto">
                 <div class="col-3 col-md-12 col-sm-12">
                     <p>
@@ -124,7 +123,6 @@
                     </p>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="row mx-auto">
