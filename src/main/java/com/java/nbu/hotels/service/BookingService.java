@@ -1,7 +1,9 @@
 package com.java.nbu.hotels.service;
 
 import com.java.nbu.hotels.entities.BookingEntity;
+import com.java.nbu.hotels.entities.RoomEntity;
 import com.java.nbu.hotels.repository.BookingRepository;
+import com.java.nbu.hotels.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,12 @@ import java.util.List;
 public class BookingService {
    private final BookingRepository bookingRepository;
 
+   private final RoomRepository roomRepository;
+
    @Autowired
-   public BookingService(BookingRepository bookingRepository) {
+   public BookingService(BookingRepository bookingRepository, RoomRepository roomRepository) {
       this.bookingRepository = bookingRepository;
+      this.roomRepository = roomRepository;
    }
 
    public List<BookingEntity> getBookingsOfUser(int userId){
@@ -41,5 +46,30 @@ public class BookingService {
    public void deleteBooking(BookingEntity bookingToDelete){
       bookingRepository.delete(bookingToDelete);
    }
+
+   public BookingEntity getBookingById(String id){
+      int bookingid = Integer.parseInt(id);
+      return bookingRepository.findBookingEntityByIdBooking(bookingid);
+   }
+
+   public void deleteBookingWithStatusNoroom(BookingEntity booking){
+      bookingRepository.delete(booking);
+   }
+
+   public void updateBookingStatus(BookingEntity booking){
+      bookingRepository.save(booking);
+   }
+
+   public void linkRoomToBooking(String roomid,String bookingid){
+      int bId = Integer.parseInt(bookingid);
+      int rId = Integer.parseInt(roomid);
+      BookingEntity b = bookingRepository.findBookingEntityByIdBooking(bId);
+      RoomEntity r = roomRepository.findRoomEntityByRoomid(rId);
+      b.getRooms().add(r);
+      bookingRepository.save(b);
+      r.getBooking().add(b);
+      roomRepository.save(r);
+   }
+
 
 }

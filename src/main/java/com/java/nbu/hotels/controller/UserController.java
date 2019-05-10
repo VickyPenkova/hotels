@@ -43,7 +43,22 @@ public class UserController {
       } else {
          userId = 0;
       }
+
       List<BookingEntity> bookings = bookingService.getBookingsOfUser(userId);
+      System.out.println("Is booking empty:" + bookings.isEmpty());
+      try {
+         if(bookings != null){
+            for (BookingEntity b:
+                  bookings) {
+               if (b.getStatus().equals("noroom")) {
+                  bookingService.deleteBookingWithStatusNoroom(b);
+                  bookings.remove(b);
+               }
+            }
+         }
+      } catch(Exception e){
+         e.getMessage();
+      }
       ModelAndView mav = new ModelAndView();
       mav.addObject("bookings", bookings);
       mav.setViewName("dashboard");
@@ -74,7 +89,7 @@ public class UserController {
       }
       UserEntity user = userService.findById(userId);
       bookingEntity.setUser(user);
-      bookingEntity.setStatus("pending");
+      bookingEntity.setStatus("noroom");
 
       //persist
       bookingService.createBooking(bookingEntity);
@@ -125,9 +140,34 @@ public class UserController {
       }else {
          bookingStepTwoModel.setViewName("bookingStepTwo");
          bookingStepTwoModel.addObject("availableRooms",availableRooms);
+         //bookingStepTwoModel.addObject("bookingEntity", bookingEntity);
       }
+
+      bookingStepTwoModel.addObject("dropdownSelectedValue", "");
       return bookingStepTwoModel;
    }
+
+   @RequestMapping(value="/confirm/{id}/{bookingid}",method = RequestMethod.GET)
+   public ModelAndView confirmBooking(@PathVariable String id, @PathVariable String bookingid){
+      // set the booking status to "pending", currently should be "noroom"
+      BookingEntity bookingEntity = bookingService.getBookingById(bookingid);
+
+      bookingService.linkRoomToBooking(id, bookingid);
+
+      System.out.println("Rooms linked by booking:" + bookingEntity.getRooms());
+
+      RoomEntity r = roomService.findRoomById(id);
+
+      System.out.println("Booking linked by room" + r.getBooking());
+
+      bookingEntity.setStatus("pending");
+      bookingService.updateBookingStatus(bookingEntity);
+
+      ModelAndView model = new ModelAndView();
+      model.setViewName("successfulBooking");
+      return model;
+   }
+
 
 
    @PreAuthorize("hasAnyRole('USER')")

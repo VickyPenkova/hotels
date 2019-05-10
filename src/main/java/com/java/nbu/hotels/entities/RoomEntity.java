@@ -1,6 +1,7 @@
 package com.java.nbu.hotels.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ public class RoomEntity {
    private int roomid;
    private String type;
    private Double price;
-   Set<BookingEntity> booking;
+   private Set<BookingEntity> booking = new HashSet<>();
 
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,7 +44,11 @@ public class RoomEntity {
       this.price = price;
    }
 
-   @ManyToMany(cascade = CascadeType.ALL)
+   @ManyToMany(fetch = FetchType.LAZY,
+         cascade = {
+               CascadeType.PERSIST,
+               CascadeType.MERGE
+         })
    @JoinTable(name = "room_has_booking", joinColumns = @JoinColumn(name="room_roomid", referencedColumnName = "roomid"),
    inverseJoinColumns = @JoinColumn(name="booking_idbooking",referencedColumnName = "idbooking"))
    public Set<BookingEntity> getBooking() {

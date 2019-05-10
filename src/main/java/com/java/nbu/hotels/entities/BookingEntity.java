@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class BookingEntity {
    private String endDate;
    private String status;
    private UserEntity user;
-   private Set<RoomEntity> rooms;
+   private Set<RoomEntity> rooms = new HashSet<>();
 
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
@@ -68,7 +69,11 @@ public class BookingEntity {
       this.user = user;
    }
 
-   @ManyToMany(mappedBy = "booking")
+   @ManyToMany(fetch = FetchType.LAZY,
+         cascade = {
+               CascadeType.PERSIST,
+               CascadeType.MERGE
+         }, mappedBy = "booking")
    public Set<RoomEntity> getRooms() {
       return rooms;
    }
