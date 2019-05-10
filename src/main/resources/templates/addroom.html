@@ -1,110 +1,123 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Add room</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-        <style>
-            .sized{
+<head>
+    <title>Add room</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-                width: 2rem;
-                height: auto;
-            }
-            .limeGreen{
-                color:#cdf248;
-            }
-            .grassGreen{
-                color:#7caa16;
-            }
-            .lightGreen{
-                color:#ffe7ad;
-            }
-            .limeGreenBG{
-                background-color: #cdf248;
-            }
-            .grassGreenBG{
-                background-color:#7caa16;
-            }
-            .table-striped tbody tr:nth-of-type(odd) {
-                color: #000;
-                background-color:#cdf248;
-            }
-            .dark{
-                background-color: #333333;
-            }
-            .whiteText{
-                color: #fff;
-            }
-            .table td, .table th {
-                vertical-align: baseline;
-                border-top: 1px solid #111;
-            }
-            .table thead th {
-                vertical-align: baseline;
-                border-bottom: 2px solid #111;
-            }
-            .darkBorder{
-                border-color: #111;
-            }
-        </style>
-    </head>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
-    <body class="dark container-fluid p-0 whiteText dark">
-        <!--       Header-->
-        <div class="container-fluid p-0">
-            <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #cdf248;">
-                <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/svg/78/78948.svg" alt="" class="sized"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="#">Awaiting Confirmation<span class="sr-only">(current)</span></a>
-                        <a class="nav-item nav-link" href="#">Add a room</a>
-                        <form class="nav-item form-inline" action="/logout" method="post">
-                            <input type="hidden"
-                                   name="${_csrf.parameterName}"
-                                   value="${_csrf.token}"/>
-                            <input class="btn btn-outline-dark" type="submit" value="Logout">
-                        </form>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-                    </div>
-                </div>
-            </nav>
-        </div>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-        <div class="row mt-3 mb-3">
-            <div class="col-12">
-                <div class="">
-                    <h2 class="text-center limeGreen">Add a room</h2>
-                </div>
-            </div>
-        </div>
-        <!--    table of bookings-->
-        <div class="row">
-            <div class="col-12"> 
-               <div class="container">
-                   
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Type of room</label>
-                        <input type="text" class="form-control" placeholder="Type of room">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Price per night</label>
-                        <input type="text" class="form-control" placeholder="Price">
-                    </div>
-                    <button type="submit" class="btn btn-warning">Submit</button>
+
+
+    <style>
+        .sized{
+
+            width: 2rem;
+            height: auto;
+        }
+        .limeGreen{
+            color:#cdf248;
+        }
+        .grassGreen{
+            color:#7caa16;
+        }
+        .lightGreen{
+            color:#ffe7ad;
+        }
+        .limeGreenBG{
+            background-color: #cdf248;
+        }
+        .grassGreenBG{
+            background-color:#7caa16;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            color: #000;
+            background-color:#cdf248;
+        }
+        .dark{
+            background-color: #333333;
+        }
+        .whiteText{
+            color: #fff;
+        }
+        .table td, .table th {
+            vertical-align: baseline;
+            border-top: 1px solid #111;
+        }
+        .table thead th {
+            vertical-align: baseline;
+            border-bottom: 2px solid #111;
+        }
+        .darkBorder{
+            border-color: #111;
+        }
+    </style>
+</head>
+
+<body class="dark container-fluid p-0 whiteText dark">
+<!--       Header-->
+<div class="container-fluid p-0">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #cdf248;">
+        <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/svg/78/78948.svg" alt="" class="sized"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Awaiting Confirmation<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Add a room</a>
+                <form class="nav-item form-inline" action="/logout" method="post">
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
+                    <input class="btn btn-outline-dark" type="submit" value="Logout">
                 </form>
-               </div>
+
             </div>
-
         </div>
+    </nav>
+</div>
+
+<div class="row mt-3 mb-3">
+    <div class="col-12">
+        <div class="">
+            <h2 class="text-center limeGreen">Add a room</h2>
+        </div>
+    </div>
+</div>
+<!--    table of bookings-->
+<div class="row">
+    <div class="col-12">
+        <div class="container">
+
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Type of room</label>
+                    <input type="text" class="form-control" placeholder="Type of room">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Price per night</label>
+                    <input type="text" class="form-control" placeholder="Price">
+                </div>
+                <button type="submit" class="btn btn-warning">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</div>
 
 
-    </body>
+</body>
 </html>
