@@ -46,4 +46,8 @@ public class RoomService {
         int id = Integer.parseInt(roomid);
         return roomRepository.findRoomEntityByRoomid(id);
     }
+
+    public RoomEntity findRoomByType(String type){
+        return roomRepository.findRoomEntityByType(type);
+    }
 }

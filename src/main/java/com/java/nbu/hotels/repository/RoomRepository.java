@@ -10,6 +10,6 @@ import java.util.List;
 public interface RoomRepository extends CrudRepository<RoomEntity, Integer> {
 
     RoomEntity findRoomEntityByRoomid(int id);
-    List<RoomRepository> findByType(String type);
+    RoomEntity findRoomEntityByType(String type);
     List<RoomRepository> findByPrice(Double price);
 }

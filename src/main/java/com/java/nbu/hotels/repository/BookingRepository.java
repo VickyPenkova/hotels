@@ -1,6 +1,7 @@
 package com.java.nbu.hotels.repository;
 
 import com.java.nbu.hotels.entities.BookingEntity;
+import com.java.nbu.hotels.entities.RoomEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

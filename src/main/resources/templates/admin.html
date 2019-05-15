@@ -76,8 +76,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Awaiting Confirmation<span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">Add a room</a>
+                <a class="nav-item nav-link active" href="/admin/adminPage">Awaiting Confirmation<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/admin/addRoom">Add a room</a>
                 <form class="nav-item form-inline" action="/logout" method="post">
                     <input type="hidden"
                            name="${_csrf.parameterName}"
@@ -125,7 +125,6 @@
                             <td th:text="${booking.getStartDate()}">...</td>
                             <td th:text="${booking.getEndDate()}">...</td>
                             <td th:text="${booking.getStatus()}">...</td>
-<!--                                <td><button type="button" href="/admin/confirm/" th:object="${booking}" class="btn btn-light">Confirm</button></td>-->
                             <td>
                                 <a th:href="@{/admin/confirm/{id}(id=${booking.getIdBooking()})}">
                                     <button type="button" class="btn btn-light">Confirm</button>
