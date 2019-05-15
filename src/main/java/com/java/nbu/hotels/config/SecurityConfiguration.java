@@ -1,11 +1,7 @@
 package com.java.nbu.hotels.config;
 
-import com.java.nbu.hotels.entities.UserEntity;
-import com.java.nbu.hotels.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -20,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
    @Autowired
    UserDetailsService userDetailsService;
+
+   @Autowired
+   private AuthenticationSuccessHandler authenticationSuccessHandler;
 
    @Override
    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -38,15 +38,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       http
             .authorizeRequests()
                .antMatchers("/resources/**").permitAll()
-            //.antMatchers("/**")
-            .antMatchers("/user/**").access("hasRole('USER')") // can pass multiple roles
+               .antMatchers("/admin/**").access("hasRole('ADMIN')")
+               .antMatchers("/user/**").access("hasRole('USER')") // can pass multiple roles
                .anyRequest().authenticated()
                .and()
             .formLogin()
                .loginPage("/login")
+               .successHandler(authenticationSuccessHandler)
                .permitAll()
                .failureUrl("/login?error=true")
-               .defaultSuccessUrl("/user/dashboard", true)
+               //.defaultSuccessUrl("/user/dashboard", true)
                .and()
             .logout()
                .permitAll()
@@ -68,5 +69,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             return rawPassword.toString().equals(hashedPassword);
          }
       };
+   }
+
+   // For admin page
+   @Autowired
+   public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
+      authenticationMgr
+            .inMemoryAuthentication()
+            .withUser("admin").password("passadmin").roles("ADMIN");
    }
 }
