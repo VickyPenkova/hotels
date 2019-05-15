@@ -72,8 +72,6 @@ public class UserController {
       ModelAndView mod = new ModelAndView();
       mod.setViewName("booking");
       mod.addObject("newBooking", newBooking);
-//      mod.addObject("startDate", startDate);
-//      mod.addObject("endDate",endDate);
 
       return mod;
    }

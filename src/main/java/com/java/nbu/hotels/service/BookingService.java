@@ -71,5 +71,7 @@ public class BookingService {
       roomRepository.save(r);
    }
 
-
+   public List<BookingEntity> getAllBookings(){
+      return bookingRepository.findAllByStatus("pending");
+   }
 }

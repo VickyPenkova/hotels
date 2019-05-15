@@ -106,37 +106,64 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">User</th>
+                    <th scope="col">Room Type</th>
                     <th scope="col">Start Date</th>
                     <th scope="col">End Date</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Confirm</th>
                     <th scope="col">Decline</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Apartement</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><button type="button" class="btn btn-light">Confirm</button></td>
-                    <td><button type="button" class="btn btn-danger">Decline</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Apartement</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><button type="button" class="btn btn-light">Confirm</button></td>
-                    <td><button type="button" class="btn btn-danger">Decline</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Apartement</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><button type="button" class="btn btn-light">Confirm</button></td>
-                    <td><button type="button" class="btn btn-danger">Decline</button></td>
-                </tr>
+                    <th:block th:each="booking : ${allBookings}">
+                        <tr>
+                            <td th:text="${booking.getIdBooking()}">...</td>
+                            <td th:text="${booking.getUser().getName()}">...</td>
+                            <td th:each="room : ${booking.getRooms()}">
+                                <span th:text="${room.getType()}"></span>
+                            </td>
+                            <td th:text="${booking.getStartDate()}">...</td>
+                            <td th:text="${booking.getEndDate()}">...</td>
+                            <td th:text="${booking.getStatus()}">...</td>
+<!--                                <td><button type="button" href="/admin/confirm/" th:object="${booking}" class="btn btn-light">Confirm</button></td>-->
+                            <td>
+                                <a th:href="@{/admin/confirm/{id}(id=${booking.getIdBooking()})}">
+                                    <button type="button" class="btn btn-light">Confirm</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/admin/decline/{id}(id=${booking.getIdBooking()})}">
+                                    <button type="button" class="btn btn-danger">Decline</button>
+                                </a>
+                            </td>
+<!--                            <td><button type="button" class="btn btn-danger">Decline</button></td>-->
+
+                        </tr>
+                    </th:block>
+<!--                <tr>-->
+<!--                    <th scope="row">1</th>-->
+<!--                    <td>Apartement</td>-->
+<!--                    <td>Mark</td>-->
+<!--                    <td>Otto</td>-->
+<!--                    <td><button type="button" class="btn btn-light">Confirm</button></td>-->
+<!--                    <td><button type="button" class="btn btn-danger">Decline</button></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">1</th>-->
+<!--                    <td>Apartement</td>-->
+<!--                    <td>Mark</td>-->
+<!--                    <td>Otto</td>-->
+<!--                    <td><button type="button" class="btn btn-light">Confirm</button></td>-->
+<!--                    <td><button type="button" class="btn btn-danger">Decline</button></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">1</th>-->
+<!--                    <td>Apartement</td>-->
+<!--                    <td>Mark</td>-->
+<!--                    <td>Otto</td>-->
+<!--                    <td><button type="button" class="btn btn-light">Confirm</button></td>-->
+<!--                    <td><button type="button" class="btn btn-danger">Decline</button></td>-->
+<!--                </tr>-->
                 </tbody>
             </table>
         </div>

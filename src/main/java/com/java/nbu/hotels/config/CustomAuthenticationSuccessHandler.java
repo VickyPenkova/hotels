@@ -20,7 +20,6 @@ public class CustomAuthenticationSuccessHandler implements
          IOException {
 
       Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-      System.out.println("Roles contains admin:" + roles.contains("ROLE_ADMIN"));
       if (roles.contains("ROLE_ADMIN")) {
          httpServletResponse.sendRedirect("/admin/adminPage");
       } else {
