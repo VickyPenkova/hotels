@@ -50,12 +50,9 @@ public class AdminController {
       mailMessage.setSubject("Booking confirmed!");
       mailMessage.setFrom("admin@H.com");
       mailMessage.setText("Congratulations! Your booking has been confirmed! Checkin date: " + booking.getStartDate() +
-            " Checkout date: " + booking.getEndDate() + "Enjoy your stay!");
-
+            " Checkout date: " + booking.getEndDate() + "   \n\nEnjoy your stay!");
       emailSenderService.sendEmail(mailMessage);
-
-      // TODO: Sveti to make page for confirmed booking for admin
-      m.setViewName("successfulBooking");
+      m.setViewName("adminBookingAccepted");
       return m;
    }
 
@@ -66,14 +63,14 @@ public class AdminController {
       bookingService.updateBookingStatus(booking);
       ModelAndView m = new ModelAndView();
 
+      // Send mail
       SimpleMailMessage mailMessage = new SimpleMailMessage();
       mailMessage.setTo(booking.getUser().getEmail());
-      mailMessage.setSubject("Booking confirmed!");
-      mailMessage.setFrom("vicky.penkova@gmail.com");
+      mailMessage.setSubject("Booking declined!");
+      mailMessage.setFrom("admin@H.com");
       mailMessage.setText("Your booking has been declined! Please contact the admin for more information!");
       emailSenderService.sendEmail(mailMessage);
-      // TODO: Sveti to make page for declined booking for admin
-      m.setViewName("successfulBooking");
+      m.setViewName("adminBookingDeclined");
       return m;
    }
 
