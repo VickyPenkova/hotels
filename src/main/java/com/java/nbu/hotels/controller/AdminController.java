@@ -87,18 +87,9 @@ public class AdminController {
 
    @RequestMapping(value = {"/addRoom"}, method = RequestMethod.POST)
    public ModelAndView addRoom(ModelAndView m, RoomEntity newRoom){
-      RoomEntity room = roomService.findRoomById(String.valueOf(newRoom.getRoomid()));
+      roomService.addRoom(newRoom);
 
-      if(room.getType() != null){
-         m.addObject("message","This room exists!");
-         m.setViewName("error");
-      }else{
-         roomService.addRoom(newRoom);
-         // TODO: Sveti to add view for successfully added room
-      }
-
-      m.setViewName("addroom");
-      m.addObject("newRoom", newRoom);
+      m.setViewName("roomAdded");
 
       return m;
    }
